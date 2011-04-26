@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mfui.widgets="mfui.widgets.*"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   minWidth="1280" 
+			   minHeight="960"
+			   creationComplete="creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.rpc.events.ResultEvent;
+
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				testDataService.send();
+			}
+
+
+			protected function testDataService_resultHandler(event:ResultEvent):void
+			{
+				data = new XMLList(XML(event.result).children());
+				resourceWidget.dataProvider = data;
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		
+		<mx:HTTPService 
+			id="testDataService" 
+			url="testData.xml" 
+			resultFormat="e4x"
+			result="testDataService_resultHandler(event)"
+			/>
+		
+		<fx:XMLList 
+			id="data"
+			/>
+		
+	</fx:Declarations>
+	
+	<s:BorderContainer
+		height="100%"
+		width="100%">
+		
+		<mfui.widgets:ResourceWidget
+			id="resourceWidget"
+			/>
+		
+	</s:BorderContainer>
+	
+</s:Application>
