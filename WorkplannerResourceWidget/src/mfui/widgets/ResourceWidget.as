@@ -1,6 +1,7 @@
 package mfui.widgets
 {
 	import mx.containers.HDividedBox;
+	import mx.containers.VDividedBox;
 	import mx.controls.AdvancedDataGrid;
 	import mx.core.UIComponent;
 	
@@ -10,28 +11,20 @@ package mfui.widgets
 	{
 		
 		private var ganttData:GanttData;
-		private var ganttChart:GanttChart;
 		
 		public function ResourceWidget()
 		{
 			this.percentHeight = this.percentWidth = 100;
 			this.setStyle("backgroundColor", 0xffdddd);
 			
-			var hDividedBox:HDividedBox = new HDividedBox();
-			hDividedBox.percentHeight = 90;
-			hDividedBox.percentWidth = 100;
-			this.addElement(hDividedBox);
+			var vDividedBox:VDividedBox = new VDividedBox();
+			vDividedBox.percentHeight = 90;
+			vDividedBox.percentWidth = 100;
+			this.addElement(vDividedBox);
 			
 			this.ganttData = new GanttData();
 			this.ganttData.percentHeight = this.ganttData.percentWidth = 100;
-			hDividedBox.addElement(ganttData);
-			
-			this.ganttChart = new GanttChart();
-			this.ganttChart.percentHeight = this.ganttChart.percentWidth = 100;
-			hDividedBox.addElement(ganttChart);
-			
-			this.ganttData.ganttChart = this.ganttChart;
-			this.ganttChart.ganttData = this.ganttData;
+			vDividedBox.addElement(ganttData);
 			
 			this.validateNow();
 		}

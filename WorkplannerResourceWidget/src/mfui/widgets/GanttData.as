@@ -18,8 +18,6 @@ package mfui.widgets
 	public class GanttData extends AdvancedDataGrid
 	{
 		
-		internal var ganttChart:GanttChart;
-		
 		public function GanttData()
 		{
 			super();
@@ -79,7 +77,8 @@ package mfui.widgets
 			groupingCollection.source = data
 			groupingCollection.refresh();
 			
-			super.dataProvider = this.ganttChart.dataProvider = groupingCollection;
+			super.dataProvider = groupingCollection;
+			
 		}
 		
 		private function creationComplete(event:FlexEvent):void
@@ -94,13 +93,11 @@ package mfui.widgets
 		
 		private function open(event:AdvancedDataGridEvent):void
 		{
-			/* TODO: keep chart in sync with grid */
 			trace(event);
 		}
 		
 		private function close(event:AdvancedDataGridEvent):void
 		{
-			/* TODO: keep chart in sync with grid */
 			trace(event);
 		}
 		
