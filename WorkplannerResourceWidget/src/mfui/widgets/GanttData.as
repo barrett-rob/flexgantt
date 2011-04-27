@@ -31,7 +31,7 @@ package mfui.widgets
 		{
 			super();
 			
-			this.verticalScrollPolicy = this.horizontalScrollPolicy = ScrollPolicy.AUTO;
+			this.verticalScrollPolicy = this.horizontalScrollPolicy = ScrollPolicy.ON;
 			
 			var workOrderCol:AdvancedDataGridColumn = new AdvancedDataGridColumn();
 			workOrderCol.minWidth = 110;
@@ -66,7 +66,7 @@ package mfui.widgets
 				finishCol  
 			];
 			
-			this.columns = dataColumns;
+			this.groupedColumns = dataColumns;
 			this.lockedColumnCount = dataColumns.length;
 			
 			addEventListener(FlexEvent.CREATION_COMPLETE, creationComplete);
@@ -165,42 +165,43 @@ package mfui.widgets
 			trace('day range:', range);
 			
 			var cols:Array = this.dataColumns;
-			
+			var c:AdvancedDataGridColumn;
 			var widths:Dictionary = new Dictionary();
-			for each (var c in dataColumns)
+			for each (c in dataColumns)
 			{
 				widths[c] = Math.min(c.width, c.minWidth);
 			}
 		
-			var col:AdvancedDataGridColumn;
 			var d:Date = new Date(first.getTime() - MS_PER_DAY);
 			
 			while (d.getTime() < last.getTime() + MS_PER_DAY)
 			{
-				col = new AdvancedDataGridColumn();
-				col.headerText = d.toLocaleDateString();
-				col.sortable = false;
-				cols.push(col);
+				c = new AdvancedDataGridColumn();
+				c.headerText = d.toLocaleDateString();
+				c.sortable = false;
+				c.width = 50;
+				cols.push(c);
 				d = new Date(d.getTime() + MS_PER_DAY);
 			}
 			
 			/* add one blank one */
 			
-			col = new AdvancedDataGridColumn();
-			col.sortable = false;
-			cols.push(col);
+			c = new AdvancedDataGridColumn();
+			c.sortable = false;
+			cols.push(c);
 			
-			this.columns = cols;
-			this.lockedColumnCount = dataColumns.length;
+			this.groupedColumns = cols;
+			//this.lockedColumnCount = dataColumns.length;
 			
-			for each (var c in this.columns)
+			this.validateNow();
+			
+			for each (c in this.columns)
 			{
 				if (widths[c])
 				{
 					c.width = widths[c];
 				}
 			}
-
 			
 		}
 		

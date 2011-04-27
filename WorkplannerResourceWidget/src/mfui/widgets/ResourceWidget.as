@@ -3,6 +3,7 @@ package mfui.widgets
 	import mx.containers.HDividedBox;
 	import mx.containers.VDividedBox;
 	import mx.controls.AdvancedDataGrid;
+	import mx.core.ScrollPolicy;
 	import mx.core.UIComponent;
 	
 	import spark.components.BorderContainer;
@@ -18,6 +19,8 @@ package mfui.widgets
 			this.setStyle("backgroundColor", 0xffdddd);
 			
 			var vDividedBox:VDividedBox = new VDividedBox();
+			vDividedBox.verticalScrollPolicy = ScrollPolicy.OFF;
+			vDividedBox.horizontalScrollPolicy = ScrollPolicy.OFF;
 			vDividedBox.percentHeight = 90;
 			vDividedBox.percentWidth = 100;
 			this.addElement(vDividedBox);
