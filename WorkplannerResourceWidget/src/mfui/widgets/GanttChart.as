@@ -1,5 +1,7 @@
 package mfui.widgets
 {
+	import flash.display.Sprite;
+	
 	import mfui.widgets.gantt.Slider;
 	
 	import mx.collections.GroupingCollection2;
@@ -24,7 +26,7 @@ package mfui.widgets
 		{
 			this.removeAllChildren();
 			
-			paintScale();
+			paintScaleLinesAndLabels();
 			
 			var i:int = 0;
 			var cursor:IViewCursor = this.ganttData.dataProvider.createCursor();
@@ -36,8 +38,10 @@ package mfui.widgets
 			/* TODO: only paint visible rows */
 		}
 		
-		internal function paintScale():void
+		internal function paintScaleLinesAndLabels():void
 		{
+			paintRowLines();
+			
 			var first:Date;
 			var last:Date;
 
@@ -59,7 +63,28 @@ package mfui.widgets
 			trace('last:', last);
 		}
 		
-		internal function paintRow(i:int, item:Object):void
+		private function paintRowLines():void
+		{
+			var i:int = 0;
+			var cursor:IViewCursor = this.ganttData.dataProvider.createCursor();
+			while (!cursor.afterLast)
+			{
+				var line:UIComponent = new UIComponent();
+				line.x = 0;
+				line.y = getRowY(i++);
+				line.graphics.lineStyle(1, 0);
+				line.graphics.lineTo(this.width, line.y);
+				this.addChild(line);
+				cursor.moveNext();
+			}
+		}
+		
+		private function getRowY(i:int):Number
+		{
+			return this.ganttData.rowHeight + i;
+		}
+		
+		private function paintRow(i:int, item:Object):void
 		{
 			if (item is XML)
 			{
@@ -71,7 +96,7 @@ package mfui.widgets
 			}
 		}
 		
-		internal function paintDetailRow(i:int, item:XML):void
+		private function paintDetailRow(i:int, item:XML):void
 		{
 			var y:Number = this.ganttData.rowHeight * i;
 			var slider:Slider = new Slider();
@@ -80,7 +105,7 @@ package mfui.widgets
 			this.addElement(slider);
 		}
 		
-		internal function paintSummaryRow(i:int, item:Object):void
+		private function paintSummaryRow(i:int, item:Object):void
 		{
 		}
 	}
