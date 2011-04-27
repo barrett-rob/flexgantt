@@ -19,7 +19,7 @@
 
 			protected function testDataService_resultHandler(event:ResultEvent):void
 			{
-				data = new XMLList(XML(event.result).children());
+				data = XML(event.result);
 				resourceWidget.dataProvider = data;
 			}
 
@@ -34,7 +34,7 @@
 			result="testDataService_resultHandler(event)"
 			/>
 		
-		<fx:XMLList 
+		<fx:XML
 			id="data"
 			/>
 		

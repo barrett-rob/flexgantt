@@ -6,6 +6,7 @@ package mfui.widgets
 	import mx.collections.Grouping;
 	import mx.collections.GroupingCollection2;
 	import mx.collections.GroupingField;
+	import mx.collections.XMLListCollection;
 	import mx.controls.AdvancedDataGrid;
 	import mx.controls.advancedDataGridClasses.AdvancedDataGridColumn;
 	import mx.core.ScrollPolicy;
@@ -60,17 +61,18 @@ package mfui.widgets
 		}
 		
 		
-		public override function set dataProvider(data:Object):void
+		public override function set dataProvider(value:Object):void
 		{
-			/* TODO: group data */
+			var data:XMLList = XML(value).elements('workItem');
 			var groupingCollection:GroupingCollection2 = new GroupingCollection2();
-			groupingCollection.source = data;
 			var groupingField:GroupingField = new GroupingField("workOrder");
 			var grouping:Grouping = new Grouping();
-			grouping.fields = [ groupingField ];
+			grouping.fields = [groupingField];
 			groupingCollection.grouping = grouping;
+			groupingCollection.source = data
+			groupingCollection.refresh();
 			
-			super.dataProvider = data;
+			super.dataProvider = groupingCollection;
 		}
 		
 		private function creationComplete(event:FlexEvent):void
