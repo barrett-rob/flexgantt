@@ -29,12 +29,5 @@ package mfui.widgets
 			this.validateNow();
 		}
 		
-		
-		public function set dataProvider(value:Object):void
-		{
-			this.ganttData.dataProvider = value;
-		}
-		
-
 	}
 }

@@ -5,39 +5,14 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
 			   minWidth="1280" 
 			   minHeight="960"
-			   creationComplete="creationCompleteHandler(event)">
+			   >
 	<fx:Script>
 		<![CDATA[
-			import mx.events.FlexEvent;
-			import mx.rpc.events.ResultEvent;
-
-			protected function creationCompleteHandler(event:FlexEvent):void
-			{
-				testDataService.send();
-			}
-
-
-			protected function testDataService_resultHandler(event:ResultEvent):void
-			{
-				data = XML(event.result);
-				resourceWidget.dataProvider = data;
-			}
 
 		]]>
 	</fx:Script>
 	<fx:Declarations>
-		
-		<mx:HTTPService 
-			id="testDataService" 
-			url="testData.xml" 
-			resultFormat="e4x"
-			result="testDataService_resultHandler(event)"
-			/>
-		
-		<fx:XML
-			id="data"
-			/>
-		
+
 	</fx:Declarations>
 	
 	<s:BorderContainer
