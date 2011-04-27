@@ -15,31 +15,16 @@ package mfui.widgets
 	import mx.events.ListEvent;
 	import mx.events.ScrollEvent;
 	
-	public class GanttData extends AdvancedDataGrid
+	public class GanttChart extends AdvancedDataGrid
 	{
 		
-		internal var ganttChart:GanttChart;
+		internal var ganttData:GanttData;
 		
-		public function GanttData()
+		public function GanttChart()
 		{
 			super();
 			
 			this.verticalScrollPolicy = ScrollPolicy.ON;
-			
-			var workOrderCol:AdvancedDataGridColumn = new AdvancedDataGridColumn();
-			workOrderCol.width = 10;
-			workOrderCol.headerText = "Work Order";
-			workOrderCol.dataField = "workOrder";
-
-			var workOrderTaskNoCol:AdvancedDataGridColumn = new AdvancedDataGridColumn();
-			workOrderTaskNoCol.width = 4;
-			workOrderTaskNoCol.headerText = "Task";
-			workOrderTaskNoCol.dataField = "workOrderTaskNo";
-
-			var descriptionCol:AdvancedDataGridColumn = new AdvancedDataGridColumn();
-			descriptionCol.width = 30;
-			descriptionCol.headerText = "Description";
-			descriptionCol.dataField = "description";
 			
 			var startCol:AdvancedDataGridColumn = new AdvancedDataGridColumn();
 			startCol.width = 20;
@@ -52,9 +37,6 @@ package mfui.widgets
 			finishCol.dataField = "finish";
 			
 			this.columns = [ 
-				workOrderCol, 
-				workOrderTaskNoCol, 
-				descriptionCol, 
 				startCol, 
 				finishCol  
 			];
@@ -63,23 +45,6 @@ package mfui.widgets
 			addEventListener(ListEvent.ITEM_CLICK, click);
 			addEventListener(AdvancedDataGridEvent.ITEM_OPEN, open);
 			addEventListener(AdvancedDataGridEvent.ITEM_CLOSE, close);
-		}
-		
-		
-		public override function set dataProvider(value:Object):void
-		{
-			/* TODO: more grouping levels */
-			
-			var data:XMLList = XML(value).elements('workItem');
-			var groupingCollection:GroupingCollection2 = new GroupingCollection2();
-			var groupingField:GroupingField = new GroupingField("workOrder");
-			var grouping:Grouping = new Grouping();
-			grouping.fields = [groupingField];
-			groupingCollection.grouping = grouping;
-			groupingCollection.source = data
-			groupingCollection.refresh();
-			
-			super.dataProvider = this.ganttChart.dataProvider = groupingCollection;
 		}
 		
 		private function creationComplete(event:FlexEvent):void
@@ -94,13 +59,11 @@ package mfui.widgets
 		
 		private function open(event:AdvancedDataGridEvent):void
 		{
-			/* TODO: keep chart in sync with grid */
 			trace(event);
 		}
 		
 		private function close(event:AdvancedDataGridEvent):void
 		{
-			/* TODO: keep chart in sync with grid */
 			trace(event);
 		}
 		
