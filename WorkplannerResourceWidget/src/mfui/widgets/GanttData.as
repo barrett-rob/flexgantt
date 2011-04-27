@@ -122,87 +122,9 @@ package mfui.widgets
 			groupingCollection.grouping = grouping;
 			groupingCollection.source = rawData
 			
-			groupingCollection.refresh(/* important */);
+			groupingCollection.refresh( /* important */ );
 			
 			super.dataProvider = groupingCollection;
-			
-			setupDateColumns();
-		}
-		
-		private function setupDateColumns():void
-		{
-			if (!rawData)
-				return;
-			
-			var first:Date;
-			var last:Date;
-			
-			/* iterate through data, get min start and max finish */
-			for each (var workItem:XML in rawData) 
-			{
-				var start:Date = new Date(Date.parse(workItem.start));
-				if (!first || start.getTime() < first.getTime())
-				{
-					first = start;
-				}
-				var finish:Date = new Date(Date.parse(workItem.finish));
-				if (!last || finish.getTime() > last.getTime())
-				{
-					last = finish;
-				}
-			}
-			trace('first:', first);
-			trace('last:', last);
-			
-			/* set up columns accordingly */
-			setupDateColumnsOver(first, last)
-		}
-		
-		private function setupDateColumnsOver(first:Date, last:Date):void
-		{
-			var MS_PER_DAY:Number = 1000 * 60 * 60 * 24;
-			var range:Number = Math.round((last.getTime() - first.getTime()) / MS_PER_DAY) + 1;
-			trace('day range:', range);
-			
-			var cols:Array = this.dataColumns;
-			var c:AdvancedDataGridColumn;
-			var widths:Dictionary = new Dictionary();
-			for each (c in dataColumns)
-			{
-				widths[c] = Math.min(c.width, c.minWidth);
-			}
-		
-			var d:Date = new Date(first.getTime() - MS_PER_DAY);
-			
-			while (d.getTime() < last.getTime() + MS_PER_DAY)
-			{
-				c = new AdvancedDataGridColumn();
-				c.headerText = d.toLocaleDateString();
-				c.sortable = false;
-				c.width = 50;
-				cols.push(c);
-				d = new Date(d.getTime() + MS_PER_DAY);
-			}
-			
-			/* add one blank one */
-			
-			c = new AdvancedDataGridColumn();
-			c.sortable = false;
-			cols.push(c);
-			
-			this.groupedColumns = cols;
-			//this.lockedColumnCount = dataColumns.length;
-			
-			this.validateNow();
-			
-			for each (c in this.columns)
-			{
-				if (widths[c])
-				{
-					c.width = widths[c];
-				}
-			}
-			
 		}
 		
 	}
