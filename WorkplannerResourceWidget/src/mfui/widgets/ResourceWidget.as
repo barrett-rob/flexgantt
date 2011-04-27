@@ -8,25 +8,26 @@ package mfui.widgets
 	public class ResourceWidget extends BorderContainer
 	{
 		
-		private var gantt:Gantt;
+		private var ganttData:GanttData;
 		
 		public function ResourceWidget()
 		{
 			this.percentHeight = this.percentWidth = 100;
 			this.setStyle("backgroundColor", 0xffdddd);
 			
-			this.gantt = new Gantt();
-			this.addElement(gantt);
-			this.gantt.percentHeight = 90;
-			this.gantt.percentWidth = 100;
+			this.ganttData = new GanttData();
+			this.addElement(ganttData);
+			this.ganttData.percentHeight = 90;
+			this.ganttData.percentWidth = 100;
 			this.validateNow();
 		}
 		
 		
 		public function set dataProvider(value:Object):void
 		{
-			this.gantt.dataProvider = value;
+			this.ganttData.dataProvider = value;
 		}
+		
 
 	}
 }
