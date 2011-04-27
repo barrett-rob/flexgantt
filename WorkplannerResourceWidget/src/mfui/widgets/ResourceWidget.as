@@ -34,6 +34,8 @@ package mfui.widgets
 			
 			this.ganttChart = new GanttChart();
 			this.ganttChart.percentHeight = this.ganttChart.percentWidth = 100;
+			this.ganttChart.ganttData = this.ganttData;
+			this.ganttData.ganttChart = this.ganttChart;
 			hDividedBox.addElement(ganttChart);
 			
 			vDividedBox.addElement(hDividedBox);

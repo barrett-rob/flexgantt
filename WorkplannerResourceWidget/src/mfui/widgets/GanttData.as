@@ -24,8 +24,9 @@ package mfui.widgets
 	public class GanttData extends AdvancedDataGrid
 	{
 		
-		private var rawData:XMLList;
 		private var dataColumns:Array;
+		internal var rawData:XMLList;
+		internal var ganttChart:GanttChart;
 		
 		public function GanttData()
 		{
@@ -87,12 +88,12 @@ package mfui.widgets
 		
 		private function open(event:AdvancedDataGridEvent):void
 		{
-			trace(event);
+			this.ganttChart.paintRows();
 		}
 		
 		private function close(event:AdvancedDataGridEvent):void
 		{
-			trace(event);
+			this.ganttChart.paintRows();
 		}
 		
 		private function getData():void
