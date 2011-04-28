@@ -75,7 +75,11 @@ package mfui.widgets
 			var cursor:IViewCursor = this._ganttData.dataProvider.createCursor();
 			while (!cursor.afterLast)
 			{
-				paintHorizontalLine(i++);
+				if (cursor.current is XML)
+				{
+					paintHorizontalLine(i);
+				}
+				i++
 				cursor.moveNext();
 			}
 		}
@@ -84,7 +88,7 @@ package mfui.widgets
 		{
 			var line:UIComponent = new UIComponent();
 			line.x = 0;
-			line.y = getRowY(i);
+			line.y = getRowY(i) - (this._ganttData.rowHeight / 2) - 1;
 			line.graphics.lineStyle(0.25, 0, 0.25);
 			line.graphics.lineTo(this.width - 10, 0);
 			this.addChild(line);
