@@ -16,11 +16,14 @@ package mfui.widgets
 	import mx.events.ResizeEvent;
 	
 	import spark.components.Label;
+	import spark.effects.Move;
+	import spark.effects.Resize;
 
 	public class GanttChart extends Canvas
 	{
 		
 		private const MS_PER_DAY:Number = 1000 * 60 * 60 * 24;
+		private const HORIZONTAL_PADDING:Number = 15;
 		
 		private var _ganttData:GanttData;
 		private var _rowHeight:Number;
@@ -92,21 +95,26 @@ package mfui.widgets
 			if (!this._first || !this._last)
 				getScaleFromData();
 
-			var msdiff:Number = this._last.getTime() - this._first.getTime();
-			var days:int = Math.round(msdiff / MS_PER_DAY) + 1;
-			
-			var pxstart:int = 15;
-			var pxfinish:int = this.width - 15;
-			var pxoffset:Number = (pxfinish - pxstart) / days;
-			var pxindex:int = pxstart;
-			
 			var d:Date = new Date(this._first.getTime());
 			while (d.getTime() < this._last.getTime() + MS_PER_DAY)
 			{
+				paintScaleLine(getDateX(d), d);
 				d = new Date(d.getTime() + MS_PER_DAY);
-				paintScaleLine(pxindex, d);
-				pxindex = pxindex + pxoffset;
 			}
+		}
+		
+		private function getDateX(d:Date):int
+		{
+			var pxstart:int = HORIZONTAL_PADDING;
+			var pxfinish:int = this.width - HORIZONTAL_PADDING;
+			var pxdiff:int = pxfinish - pxstart;
+			
+			var msdiff:Number = this._last.getTime() - this._first.getTime();
+			
+			var factor:Number = pxdiff / msdiff;
+			
+			var x:int = (d.getTime() - this._first.getTime()) * factor;
+			return x;
 		}
 		
 		private function paintScaleLine(x:int, d:Date):void
@@ -166,7 +174,7 @@ package mfui.widgets
 			/* TODO: only paint visible rows */
 			if (item is XML)
 			{
-				paintDetailRow(i, XML(item));
+				paintSlider(i, XML(item));
 			}
 			else
 			{
@@ -174,12 +182,26 @@ package mfui.widgets
 			}
 		}
 		
-		private function paintDetailRow(i:int, item:XML):void
+		private function paintSlider(i:int, item:XML):void
 		{
 			var slider:Slider = new Slider();
-			slider.y = getRowY(i);
-			slider.x = 100;
-			// this.addElement(slider);
+			slider.y = getRowY(i) - this._rowHeight - 1;
+			slider.item = item;
+			this.addElement(slider);
+			
+			var xTo:int = getDateX(slider.start); 
+			
+			var m:Move;
+			m = new Move(slider);
+			m.xBy = m.yBy = 1;
+			m.xFrom = slider.x;
+			m.xTo = xTo;
+			m.play();
+			
+			var r:Resize = new Resize(slider);
+			r.widthFrom = slider.width;
+			r.widthTo = getDateX(slider.finish) - xTo;
+			r.play();
 		}
 		
 		private function paintGroupingRow(i:int, item:Object):void

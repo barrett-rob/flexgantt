@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workItems>
 	<workItem>
-		<workOrder>A1234567</workOrder><workOrderTaskNo>001</workOrderTaskNo><description>task 1</description><start>Wed Apr 1 15:30:17 GMT+1000 2006</start><finish>Wed Apr 1 15:30:17 GMT+1000 2006</finish>
+		<workOrder>A1234567</workOrder><workOrderTaskNo>001</workOrderTaskNo><description>task 1</description><start>Apr 1 15:30:17 GMT+1000 2006</start><finish>Apr 1 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>A1234567</workOrder><workOrderTaskNo>002</workOrderTaskNo><description>task 2</description><start>Wed Apr 2 15:30:17 GMT+1000 2006</start><finish>Wed Apr 2 15:30:17 GMT+1000 2006</finish>
+		<workOrder>A1234567</workOrder><workOrderTaskNo>002</workOrderTaskNo><description>task 2</description><start>Apr 2 15:30:17 GMT+1000 2006</start><finish>Apr 2 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>A1234567</workOrder><workOrderTaskNo>003</workOrderTaskNo><description>task 3</description><start>Wed Apr 3 15:30:17 GMT+1000 2006</start><finish>Wed Apr 3 15:30:17 GMT+1000 2006</finish>
+		<workOrder>A1234567</workOrder><workOrderTaskNo>003</workOrderTaskNo><description>task 3</description><start>Apr 3 15:30:17 GMT+1000 2006</start><finish>Apr 3 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>A1234567</workOrder><workOrderTaskNo>004</workOrderTaskNo><description>task 4</description><start>Wed Apr 4 15:30:17 GMT+1000 2006</start><finish>Wed Apr 4 15:30:17 GMT+1000 2006</finish>
+		<workOrder>A1234567</workOrder><workOrderTaskNo>004</workOrderTaskNo><description>task 4</description><start>Apr 4 15:30:17 GMT+1000 2006</start><finish>Apr 4 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>A1234567</workOrder><workOrderTaskNo>005</workOrderTaskNo><description>task 5</description><start>Wed Apr 5 15:30:17 GMT+1000 2006</start><finish>Wed Apr 4 15:30:17 GMT+1000 2006</finish>
+		<workOrder>A1234567</workOrder><workOrderTaskNo>005</workOrderTaskNo><description>task 5</description><start>Apr 5 15:30:17 GMT+1000 2006</start><finish>Apr 4 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>B2345678</workOrder><workOrderTaskNo>001</workOrderTaskNo><description>task 1</description><start>Wed Apr 6 15:30:17 GMT+1000 2006</start><finish>Wed Apr 7 15:30:17 GMT+1000 2006</finish>
+		<workOrder>B2345678</workOrder><workOrderTaskNo>001</workOrderTaskNo><description>task 1</description><start>Apr 6 15:30:17 GMT+1000 2006</start><finish>Apr 7 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>B2345678</workOrder><workOrderTaskNo>002</workOrderTaskNo><description>task 2</description><start>Wed Apr 8 15:30:17 GMT+1000 2006</start><finish>Wed Apr 9 15:30:17 GMT+1000 2006</finish>
+		<workOrder>B2345678</workOrder><workOrderTaskNo>002</workOrderTaskNo><description>task 2</description><start>Apr 8 15:30:17 GMT+1000 2006</start><finish>Apr 9 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>B2345678</workOrder><workOrderTaskNo>003</workOrderTaskNo><description>task 3</description><start>Wed Apr 10 15:30:17 GMT+1000 2006</start><finish>Wed Apr 11 15:30:17 GMT+1000 2006</finish>
+		<workOrder>B2345678</workOrder><workOrderTaskNo>003</workOrderTaskNo><description>task 3</description><start>Apr 10 15:30:17 GMT+1000 2006</start><finish>Apr 11 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>B2345678</workOrder><workOrderTaskNo>004</workOrderTaskNo><description>task 4</description><start>Wed Apr 12 15:30:17 GMT+1000 2006</start><finish>Wed Apr 13 15:30:17 GMT+1000 2006</finish>
+		<workOrder>B2345678</workOrder><workOrderTaskNo>004</workOrderTaskNo><description>task 4</description><start>Apr 12 15:30:17 GMT+1000 2006</start><finish>Apr 13 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>B2345678</workOrder><workOrderTaskNo>005</workOrderTaskNo><description>task 5</description><start>Wed Apr 14 15:30:17 GMT+1000 2006</start><finish>Wed Apr 15 15:30:17 GMT+1000 2006</finish>
+		<workOrder>B2345678</workOrder><workOrderTaskNo>005</workOrderTaskNo><description>task 5</description><start>Apr 14 15:30:17 GMT+1000 2006</start><finish>Apr 15 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>B2345678</workOrder><workOrderTaskNo>006</workOrderTaskNo><description>task 6</description><start>Wed Apr 16 15:30:17 GMT+1000 2006</start><finish>Wed Apr 17 15:30:17 GMT+1000 2006</finish>
+		<workOrder>B2345678</workOrder><workOrderTaskNo>006</workOrderTaskNo><description>task 6</description><start>Apr 16 15:30:17 GMT+1000 2006</start><finish>Apr 17 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>001</workOrderTaskNo><description>task 1</description><start>Wed Apr 10 15:30:17 GMT+1000 2006</start><finish>Wed Apr 15 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>001</workOrderTaskNo><description>task 1</description><start>Apr 10 15:30:17 GMT+1000 2006</start><finish>Apr 15 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>002</workOrderTaskNo><description>task 2</description><start>Wed Apr 11 15:30:17 GMT+1000 2006</start><finish>Wed Apr 16 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>002</workOrderTaskNo><description>task 2</description><start>Apr 11 15:30:17 GMT+1000 2006</start><finish>Apr 16 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>003</workOrderTaskNo><description>task 3</description><start>Wed Apr 12 15:30:17 GMT+1000 2006</start><finish>Wed Apr 17 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>003</workOrderTaskNo><description>task 3</description><start>Apr 12 15:30:17 GMT+1000 2006</start><finish>Apr 17 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>004</workOrderTaskNo><description>task 4</description><start>Wed Apr 13 15:30:17 GMT+1000 2006</start><finish>Wed Apr 18 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>004</workOrderTaskNo><description>task 4</description><start>Apr 13 15:30:17 GMT+1000 2006</start><finish>Apr 18 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>005</workOrderTaskNo><description>task 5</description><start>Wed Apr 14 15:30:17 GMT+1000 2006</start><finish>Wed Apr 19 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>005</workOrderTaskNo><description>task 5</description><start>Apr 14 15:30:17 GMT+1000 2006</start><finish>Apr 19 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>006</workOrderTaskNo><description>task 6</description><start>Wed Apr 15 15:30:17 GMT+1000 2006</start><finish>Wed Apr 20 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>006</workOrderTaskNo><description>task 6</description><start>Apr 15 15:30:17 GMT+1000 2006</start><finish>Apr 20 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>007</workOrderTaskNo><description>task 7</description><start>Wed Apr 16 15:30:17 GMT+1000 2006</start><finish>Wed Apr 21 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>007</workOrderTaskNo><description>task 7</description><start>Apr 16 15:30:17 GMT+1000 2006</start><finish>Apr 21 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>008</workOrderTaskNo><description>task 8</description><start>Wed Apr 17 15:30:17 GMT+1000 2006</start><finish>Wed Apr 22 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>008</workOrderTaskNo><description>task 8</description><start>Apr 17 15:30:17 GMT+1000 2006</start><finish>Apr 22 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>009</workOrderTaskNo><description>task 9</description><start>Wed Apr 18 15:30:17 GMT+1000 2006</start><finish>Wed Apr 23 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>009</workOrderTaskNo><description>task 9</description><start>Apr 18 15:30:17 GMT+1000 2006</start><finish>Apr 23 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>010</workOrderTaskNo><description>task 10</description><start>Wed Apr 19 15:30:17 GMT+1000 2006</start><finish>Wed Apr 24 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>010</workOrderTaskNo><description>task 10</description><start>Apr 19 15:30:17 GMT+1000 2006</start><finish>Apr 24 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 	<workItem>
-		<workOrder>C3456789</workOrder><workOrderTaskNo>011</workOrderTaskNo><description>task 11</description><start>Wed Apr 20 15:30:17 GMT+1000 2006</start><finish>Wed Apr 25 15:30:17 GMT+1000 2006</finish>
+		<workOrder>C3456789</workOrder><workOrderTaskNo>011</workOrderTaskNo><description>task 11</description><start>Apr 20 15:30:17 GMT+1000 2006</start><finish>Apr 25 15:30:17 GMT+1000 2006</finish>
 	</workItem>
 </workItems>
