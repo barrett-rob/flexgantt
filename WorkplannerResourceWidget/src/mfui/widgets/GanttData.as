@@ -89,12 +89,12 @@ package mfui.widgets
 		
 		private function open(event:AdvancedDataGridEvent):void
 		{
-			this.ganttChart.paintRows();
+			this.ganttChart.paintChart();
 		}
 		
 		private function close(event:AdvancedDataGridEvent):void
 		{
-			this.ganttChart.paintRows();
+			this.ganttChart.paintChart();
 		}
 		
 		private function getData():void

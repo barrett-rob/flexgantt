@@ -12,6 +12,7 @@ package mfui.widgets
 	import mx.controls.AdvancedDataGrid;
 	import mx.core.ScrollPolicy;
 	import mx.core.UIComponent;
+	import mx.events.ResizeEvent;
 
 	public class GanttChart extends Canvas
 	{
@@ -21,6 +22,7 @@ package mfui.widgets
 		
 		public function GanttChart()
 		{
+			this.addEventListener(ResizeEvent.RESIZE, resize);
 		}
 		
 		internal function set ganttData(ganttData:GanttData):void
@@ -29,11 +31,22 @@ package mfui.widgets
 			this._rowHeight = this._ganttData.rowHeight;
 		}
 		
-		internal function paintRows():void
+		private function resize(event:ResizeEvent):void
 		{
+			paintChart();
+		}
+		
+		internal function paintChart():void
+		{
+			
+			if (!this._ganttData || !this._ganttData.dataProvider || !this._ganttData.rawData)
+			{
+				return;
+			}
+			
 			this.removeAllChildren();
 			
-			paintScaleLinesAndLabels();
+			paintLinesAndLabels();
 			
 			var i:int = 0;
 			var cursor:IViewCursor = this._ganttData.dataProvider.createCursor();
@@ -45,13 +58,38 @@ package mfui.widgets
 			/* TODO: only paint visible rows */
 		}
 		
-		internal function paintScaleLinesAndLabels():void
+		private function paintLinesAndLabels():void
 		{
 			paintRowLines();
-			
+			paintScaleLines();
+		}
+		
+		private function paintRowLines():void
+		{
+			var i:int = 0;
+			var cursor:IViewCursor = this._ganttData.dataProvider.createCursor();
+			while (!cursor.afterLast)
+			{
+				paintRowLine(i++);
+				cursor.moveNext();
+			}
+		}
+		
+		private function paintRowLine(i:int):void
+		{
+			var line:UIComponent = new UIComponent();
+			line.x = 0;
+			line.y = getRowY(i);
+			line.graphics.lineStyle(0.25, 0, 0.25);
+			line.graphics.lineTo(this.width - 10, 0);
+			this.addChild(line);
+		}
+		
+		private function paintScaleLines():void
+		{
 			var first:Date;
 			var last:Date;
-
+			
 			/* iterate through data, get min start and max finish */
 			for each (var workItem:XML in this._ganttData.rawData) 
 			{
@@ -70,22 +108,6 @@ package mfui.widgets
 			trace('last:', last);
 		}
 		
-		private function paintRowLines():void
-		{
-			var i:int = 0;
-			var cursor:IViewCursor = this._ganttData.dataProvider.createCursor();
-			while (!cursor.afterLast)
-			{
-				var line:UIComponent = new UIComponent();
-				line.x = 0;
-				line.y = getRowY(i++);
-				line.graphics.lineStyle(0.25, 0, 0.25);
-				line.graphics.lineTo(this.width - 10, 0);
-				this.addChild(line);
-				cursor.moveNext();
-			}
-		}
-		
 		private function getRowY(i:int):Number
 		{
 			return ((this._rowHeight + /* padding */ 4) * (i + 1)) + this._ganttData.headerHeight;
@@ -99,7 +121,7 @@ package mfui.widgets
 			}
 			else
 			{
-				paintSummaryRow(i, item);
+				paintGroupingRow(i, item);
 			}
 		}
 		
@@ -111,7 +133,7 @@ package mfui.widgets
 			// this.addElement(slider);
 		}
 		
-		private function paintSummaryRow(i:int, item:Object):void
+		private function paintGroupingRow(i:int, item:Object):void
 		{
 		}
 	}
