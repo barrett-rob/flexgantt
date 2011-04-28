@@ -16,6 +16,7 @@ package mfui.widgets.gantt
 			super();
 			this.height = 18;
 			this.width = 20;
+			this.setStyle("skinClass", SliderSkin);
 		}        
 		
 		public function set item(item:XML):void
@@ -28,7 +29,7 @@ package mfui.widgets.gantt
 		
 		private function getToolTip(item:XML):String
 		{
-			return "Work order: " + item.workOrder 
+			return "Work Order: " + item.workOrder 
 				+ "\nTask: " + item.workOrderTaskNo
 				+ "\nStart: " + this.start
 				+ "\nFinish: " + this.finish;
