@@ -54,13 +54,7 @@ package mfui.widgets
 			
 			this.removeAllChildren();
 			paintLinesAndLabels();
-			var i:int = 0;
-			var cursor:IViewCursor = this._ganttData.dataProvider.createCursor();
-			while (!cursor.afterLast)
-			{
-				paintRow(i++, cursor.current);
-				cursor.moveNext();
-			}
+			paintRows();
 		}
 		
 		private function paintLinesAndLabels():void
@@ -171,6 +165,17 @@ package mfui.widgets
 		private function getRowY(i:int):Number
 		{
 			return ((this._rowHeight + /* padding */ 4) * (i + 1)) + this._ganttData.headerHeight;
+		}
+		
+		private function paintRows():void
+		{
+			var i:int = 0;
+			var cursor:IViewCursor = this._ganttData.dataProvider.createCursor();
+			while (!cursor.afterLast)
+			{
+				paintRow(i++, cursor.current);
+				cursor.moveNext();
+			}
 		}
 		
 		private function paintRow(i:int, item:Object):void
