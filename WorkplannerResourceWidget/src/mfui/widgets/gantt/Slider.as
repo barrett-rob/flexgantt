@@ -69,7 +69,6 @@ package mfui.widgets.gantt
 				return;
 			var mouseAt:Point = localToGlobal(new Point(event.localX, event.localY));
 			var delta:int = mouseAt.x - moveRelativeTo.x;
-			trace("from x:", moveRelativeTo.x, "to x:", mouseAt.x, "delta:", delta);
 			this.x += delta;
 			this.moveRelativeTo = mouseAt;
 		}
