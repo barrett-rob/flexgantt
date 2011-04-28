@@ -16,10 +16,17 @@ package mfui.widgets
 	public class GanttChart extends Canvas
 	{
 		
-		internal var ganttData:GanttData;
+		private var _ganttData:GanttData;
+		private var _rowHeight:Number;
 		
 		public function GanttChart()
 		{
+		}
+		
+		internal function set ganttData(ganttData:GanttData):void
+		{
+			this._ganttData = ganttData;
+			this._rowHeight = this._ganttData.rowHeight;
 		}
 		
 		internal function paintRows():void
@@ -29,7 +36,7 @@ package mfui.widgets
 			paintScaleLinesAndLabels();
 			
 			var i:int = 0;
-			var cursor:IViewCursor = this.ganttData.dataProvider.createCursor();
+			var cursor:IViewCursor = this._ganttData.dataProvider.createCursor();
 			while (!cursor.afterLast)
 			{
 				paintRow(i++, cursor.current);
@@ -46,7 +53,7 @@ package mfui.widgets
 			var last:Date;
 
 			/* iterate through data, get min start and max finish */
-			for each (var workItem:XML in this.ganttData.rawData) 
+			for each (var workItem:XML in this._ganttData.rawData) 
 			{
 				var start:Date = new Date(Date.parse(workItem.start));
 				if (!first || start.getTime() < first.getTime())
@@ -66,13 +73,13 @@ package mfui.widgets
 		private function paintRowLines():void
 		{
 			var i:int = 0;
-			var cursor:IViewCursor = this.ganttData.dataProvider.createCursor();
+			var cursor:IViewCursor = this._ganttData.dataProvider.createCursor();
 			while (!cursor.afterLast)
 			{
 				var line:UIComponent = new UIComponent();
 				line.x = 0;
 				line.y = getRowY(i++);
-				line.graphics.lineStyle(0.5, 0, 0.5);
+				line.graphics.lineStyle(0.25, 0, 0.25);
 				line.graphics.lineTo(this.width - 10, 0);
 				this.addChild(line);
 				cursor.moveNext();
@@ -81,7 +88,7 @@ package mfui.widgets
 		
 		private function getRowY(i:int):Number
 		{
-			return (this.ganttData.rowHeight * (i + 1)) + this.ganttData.headerHeight;
+			return ((this._rowHeight + /* padding */ 4) * (i + 1)) + this._ganttData.headerHeight;
 		}
 		
 		private function paintRow(i:int, item:Object):void
@@ -98,11 +105,10 @@ package mfui.widgets
 		
 		private function paintDetailRow(i:int, item:XML):void
 		{
-			var y:Number = this.ganttData.rowHeight * i;
 			var slider:Slider = new Slider();
-			slider.y = y;
+			slider.y = getRowY(i);
 			slider.x = 100;
-			this.addElement(slider);
+			// this.addElement(slider);
 		}
 		
 		private function paintSummaryRow(i:int, item:Object):void

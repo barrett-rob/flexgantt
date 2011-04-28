@@ -33,6 +33,7 @@ package mfui.widgets
 			super();
 			
 			this.verticalScrollPolicy = this.horizontalScrollPolicy = ScrollPolicy.ON;
+			this.variableRowHeight = false;
 			
 			var workOrderCol:AdvancedDataGridColumn = new AdvancedDataGridColumn();
 			workOrderCol.minWidth = 110;
