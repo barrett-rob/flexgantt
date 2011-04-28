@@ -17,6 +17,8 @@ package mfui.widgets
 	public class GanttChart extends Canvas
 	{
 		
+		private const MS_PER_DAY:Number = 1000 * 60 * 60 * 24;
+		
 		private var _ganttData:GanttData;
 		private var _rowHeight:Number;
 		
@@ -40,14 +42,10 @@ package mfui.widgets
 		{
 			
 			if (!this._ganttData || !this._ganttData.dataProvider || !this._ganttData.rawData)
-			{
-				return;
-			}
+				return; /* no data yet */
 			
 			this.removeAllChildren();
-			
 			paintLinesAndLabels();
-			
 			var i:int = 0;
 			var cursor:IViewCursor = this._ganttData.dataProvider.createCursor();
 			while (!cursor.afterLast)
@@ -55,27 +53,26 @@ package mfui.widgets
 				paintRow(i++, cursor.current);
 				cursor.moveNext();
 			}
-			/* TODO: only paint visible rows */
 		}
 		
 		private function paintLinesAndLabels():void
 		{
-			paintRowLines();
+			paintHorizontalLines();
 			paintScaleLines();
 		}
 		
-		private function paintRowLines():void
+		private function paintHorizontalLines():void
 		{
 			var i:int = 0;
 			var cursor:IViewCursor = this._ganttData.dataProvider.createCursor();
 			while (!cursor.afterLast)
 			{
-				paintRowLine(i++);
+				paintHorizontalLine(i++);
 				cursor.moveNext();
 			}
 		}
 		
-		private function paintRowLine(i:int):void
+		private function paintHorizontalLine(i:int):void
 		{
 			var line:UIComponent = new UIComponent();
 			line.x = 0;
@@ -104,6 +101,11 @@ package mfui.widgets
 					last = finish;
 				}
 			}
+			setScale(first, last);
+		}
+		
+		private function setScale(first:Date, last:Date):void
+		{
 			trace('first:', first);
 			trace('last:', last);
 		}
@@ -115,6 +117,7 @@ package mfui.widgets
 		
 		private function paintRow(i:int, item:Object):void
 		{
+			/* TODO: only paint visible rows */
 			if (item is XML)
 			{
 				paintDetailRow(i, XML(item));
