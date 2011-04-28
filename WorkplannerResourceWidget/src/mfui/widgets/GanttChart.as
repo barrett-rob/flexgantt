@@ -21,6 +21,8 @@ package mfui.widgets
 		
 		private var _ganttData:GanttData;
 		private var _rowHeight:Number;
+		private var _first:Date;
+		private var _last:Date;
 		
 		public function GanttChart()
 		{
@@ -84,6 +86,38 @@ package mfui.widgets
 		
 		private function paintScaleLines():void
 		{
+			if (!this._first || !this._last)
+				getScaleFromData();
+
+			var msdiff:Number = this._last.getTime() - this._first.getTime();
+			var days:int = Math.round(msdiff / MS_PER_DAY) + 1;
+			
+			var pxstart:int = 15;
+			var pxfinish:int = this.width - 15;
+			var pxoffset:Number = (pxfinish - pxstart) / days;
+			var pxindex:int = pxstart;
+			
+			var d:Date = new Date(this._first.getTime());
+			while (d.getTime() < this._last.getTime() + MS_PER_DAY)
+			{
+				d = new Date(d.getTime() + MS_PER_DAY);
+				paintScaleLine(pxindex, d);
+				pxindex = pxindex + pxoffset;
+			}
+		}
+		
+		private function paintScaleLine(x:int, d:Date):void
+		{
+			var line:UIComponent = new UIComponent();
+			line.x = x;
+			line.y = this._ganttData.headerHeight + 5;
+			line.graphics.lineStyle(0.25, 0, 0.25);
+			line.graphics.lineTo(0, this.height);
+			this.addChild(line);
+		}
+		
+		private function getScaleFromData():void
+		{
 			var first:Date;
 			var last:Date;
 			
@@ -106,8 +140,8 @@ package mfui.widgets
 		
 		private function setScale(first:Date, last:Date):void
 		{
-			trace('first:', first);
-			trace('last:', last);
+			this._first = first;
+			this._last = last;
 		}
 		
 		private function getRowY(i:int):Number
