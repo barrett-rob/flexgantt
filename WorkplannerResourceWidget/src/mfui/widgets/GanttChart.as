@@ -72,8 +72,8 @@ package mfui.widgets
 				var line:UIComponent = new UIComponent();
 				line.x = 0;
 				line.y = getRowY(i++);
-				line.graphics.lineStyle(1, 0);
-				line.graphics.lineTo(this.width, line.y);
+				line.graphics.lineStyle(0.5, 0, 0.5);
+				line.graphics.lineTo(this.width - 10, 0);
 				this.addChild(line);
 				cursor.moveNext();
 			}
@@ -81,7 +81,7 @@ package mfui.widgets
 		
 		private function getRowY(i:int):Number
 		{
-			return this.ganttData.rowHeight + i;
+			return (this.ganttData.rowHeight * (i + 1)) + this.ganttData.headerHeight;
 		}
 		
 		private function paintRow(i:int, item:Object):void

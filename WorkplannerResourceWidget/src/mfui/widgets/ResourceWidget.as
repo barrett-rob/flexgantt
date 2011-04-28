@@ -17,7 +17,6 @@ package mfui.widgets
 		public function ResourceWidget()
 		{
 			this.percentHeight = this.percentWidth = 100;
-			this.setStyle("backgroundColor", 0xffdddd);
 			
 			var vDividedBox:VDividedBox = new VDividedBox();
 			vDividedBox.verticalScrollPolicy = vDividedBox.horizontalScrollPolicy = ScrollPolicy.OFF;
