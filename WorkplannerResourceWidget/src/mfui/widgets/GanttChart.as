@@ -1,6 +1,7 @@
 package mfui.widgets
 {
 	import flash.display.Sprite;
+	import flash.text.engine.FontWeight;
 	
 	import mfui.widgets.gantt.Slider;
 	
@@ -13,6 +14,8 @@ package mfui.widgets
 	import mx.core.ScrollPolicy;
 	import mx.core.UIComponent;
 	import mx.events.ResizeEvent;
+	
+	import spark.components.Label;
 
 	public class GanttChart extends Canvas
 	{
@@ -114,6 +117,15 @@ package mfui.widgets
 			line.graphics.lineStyle(0.25, 0, 0.25);
 			line.graphics.lineTo(0, this.height);
 			this.addChild(line);
+			var label:Label = new Label();
+			label.setStyle("fontFamily", "Helvetica, _sans");
+			label.setStyle("fontSize", "10px");
+			label.alpha = 0.33;
+			label.text = d.toLocaleDateString();
+			label.x = line.x + 12;
+			label.y = 10;
+			label.rotation = 90;
+			this.addElement(label);
 		}
 		
 		private function getScaleFromData():void
