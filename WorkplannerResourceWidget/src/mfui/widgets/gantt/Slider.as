@@ -36,6 +36,11 @@ package mfui.widgets.gantt
 			this._item = item;
 		}
 		
+		public function get item():XML
+		{
+			return this._item;
+		}
+		
 		public function set start(d:Date):void
 		{
 			this._item.start = d.toString();

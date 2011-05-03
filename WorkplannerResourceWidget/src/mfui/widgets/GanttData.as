@@ -4,6 +4,8 @@ package mfui.widgets
 	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
 	
+	import mfui.widgets.gantt.SliderEvent;
+	
 	import mx.collections.Grouping;
 	import mx.collections.GroupingCollection2;
 	import mx.collections.GroupingField;
@@ -73,11 +75,11 @@ package mfui.widgets
 			this.groupedColumns = dataColumns;
 			this.lockedColumnCount = dataColumns.length;
 			
-			addEventListener(FlexEvent.CREATION_COMPLETE, creationComplete);
-			addEventListener(ListEvent.ITEM_CLICK, click);
-			addEventListener(AdvancedDataGridEvent.ITEM_OPEN, open);
-			addEventListener(AdvancedDataGridEvent.ITEM_CLOSE, close);
-			addEventListener(AdvancedDataGridEvent.SORT, sort);
+			this.addEventListener(FlexEvent.CREATION_COMPLETE, creationComplete);
+			this.addEventListener(ListEvent.ITEM_CLICK, click);
+			this.addEventListener(AdvancedDataGridEvent.ITEM_OPEN, open);
+			this.addEventListener(AdvancedDataGridEvent.ITEM_CLOSE, close);
+			this.addEventListener(AdvancedDataGridEvent.SORT, sort);
 		}
 		
 		private function creationComplete(event:FlexEvent):void
@@ -127,7 +129,7 @@ package mfui.widgets
 			groupingCollection.grouping = grouping;
 			groupingCollection.source = rawData
 			
-			groupingCollection.refresh( /* important */ );
+			groupingCollection.refresh(true);
 			
 			super.dataProvider = groupingCollection;
 		}

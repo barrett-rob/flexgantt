@@ -9,6 +9,7 @@ package mfui.widgets
 	import mfui.widgets.gantt.SliderEvent;
 	
 	import mx.collections.GroupingCollection2;
+	import mx.collections.ICollectionView;
 	import mx.collections.IViewCursor;
 	import mx.containers.Canvas;
 	import mx.containers.HDividedBox;
@@ -253,17 +254,6 @@ package mfui.widgets
 			}
 		}
 		
-		private function slidermove(event:SliderEvent):void
-		{
-			var slider:Slider = event.slider;
-			var start:Date = getDateForX(slider.x);
-			var finish:Date = getDateForX(slider.x + slider.width);
-			trace('start:', start);
-			trace('finish:', finish);
-			slider.start = start;
-			slider.finish = finish;
-		}
-		
 		private function getDateForX(x:int):Date
 		{
 			var pxstart:int = HORIZONTAL_PADDING;
@@ -274,6 +264,21 @@ package mfui.widgets
 			var msdiff:Number = this._last.getTime() - this._first.getTime();
 			var d:Date = new Date((msdiff * factor) + this._first.getTime());
 			return d;
+		}
+		
+		private function slidermove(event:SliderEvent):void
+		{
+			var slider:Slider = event.slider;
+			var start:Date = getDateForX(slider.x);
+			var finish:Date = getDateForX(slider.x + slider.width);
+			slider.start = start;
+			slider.finish = finish;
+			
+			if (!this._ganttData.dataProvider)
+				return;
+			
+			var dataProvider:ICollectionView = ICollectionView(this._ganttData.dataProvider);
+			dataProvider.refresh();
 		}
 		
 	}
