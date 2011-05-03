@@ -1,6 +1,8 @@
 package mfui.widgets
 {
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
+	import flash.geom.Rectangle;
 	import flash.text.engine.FontWeight;
 	
 	import mfui.widgets.gantt.Slider;
@@ -24,15 +26,18 @@ package mfui.widgets
 		
 		private const MS_PER_DAY:Number = 1000 * 60 * 60 * 24;
 		private const HORIZONTAL_PADDING:Number = 15;
+		private const ZOOM_FACTOR:Number = 1.5;
 		
 		private var _ganttData:GanttData;
 		private var _rowHeight:Number;
+		private var _scaledWidth:Number;
 		private var _first:Date;
 		private var _last:Date;
 		
 		public function GanttChart()
 		{
 			this.addEventListener(ResizeEvent.RESIZE, resize);
+			this.addEventListener(MouseEvent.MOUSE_WHEEL, mousewheel);
 		}
 		
 		internal function set ganttData(ganttData:GanttData):void
@@ -51,6 +56,9 @@ package mfui.widgets
 			
 			if (!this._ganttData || !this._ganttData.dataProvider || !this._ganttData.rawData)
 				return; /* no data yet */
+			
+			if (!this._scaledWidth || this._scaledWidth < 1)
+				this._scaledWidth = this.width;
 			
 			this.removeAllChildren();
 			paintLinesAndLabels();
@@ -84,7 +92,7 @@ package mfui.widgets
 			line.x = 0;
 			line.y = getRowY(i) - (this._ganttData.rowHeight / 2) - 1;
 			line.graphics.lineStyle(0.25, 0, 0.25);
-			line.graphics.lineTo(this.width - 10, 0);
+			line.graphics.lineTo(this._scaledWidth - HORIZONTAL_PADDING, 0);
 			this.addChild(line);
 		}
 		
@@ -104,7 +112,7 @@ package mfui.widgets
 		private function getDateX(d:Date):int
 		{
 			var pxstart:int = HORIZONTAL_PADDING;
-			var pxfinish:int = this.width - HORIZONTAL_PADDING;
+			var pxfinish:int = this._scaledWidth - HORIZONTAL_PADDING;
 			var pxdiff:int = pxfinish - pxstart;
 			
 			var msdiff:Number = this._last.getTime() - this._first.getTime();
@@ -215,6 +223,32 @@ package mfui.widgets
 		
 		private function paintGroupingRow(i:int, item:Object):void
 		{
+		}
+		
+		private function mousewheel(event:MouseEvent):void
+		{
+			if (event.target != this)
+				return;
+			
+			trace('a', this.horizontalScrollPosition);
+			trace('x', event.localX);
+			
+			var xoffset:Number = this.horizontalScrollPosition + event.localX;
+			trace('xoffset', xoffset);
+			
+			
+			if (event.delta > 0)
+			{
+				this._scaledWidth = this._scaledWidth * ZOOM_FACTOR;
+				this.horizontalScrollPosition = (xoffset * ZOOM_FACTOR) - event.localX;
+				paintChart();
+			} 
+			else if (event.delta < 0)
+			{
+				this._scaledWidth = this._scaledWidth / ZOOM_FACTOR;
+				this.horizontalScrollPosition = (xoffset / ZOOM_FACTOR) - event.localX;
+				paintChart();
+			}
 		}
 	}
 }
