@@ -230,12 +230,7 @@ package mfui.widgets
 			if (event.target != this)
 				return;
 			
-			trace('a', this.horizontalScrollPosition);
-			trace('x', event.localX);
-			
 			var xoffset:Number = this.horizontalScrollPosition + event.localX;
-			trace('xoffset', xoffset);
-			
 			
 			if (event.delta > 0)
 			{
