@@ -13,6 +13,8 @@ package mfui.widgets
 	import mx.controls.advancedDataGridClasses.AdvancedDataGridColumn;
 	import mx.core.ScrollPolicy;
 	import mx.events.AdvancedDataGridEvent;
+	import mx.events.CollectionEvent;
+	import mx.events.CollectionEventKind;
 	import mx.events.FlexEvent;
 	import mx.events.ListEvent;
 	import mx.events.ScrollEvent;
@@ -75,6 +77,7 @@ package mfui.widgets
 			addEventListener(ListEvent.ITEM_CLICK, click);
 			addEventListener(AdvancedDataGridEvent.ITEM_OPEN, open);
 			addEventListener(AdvancedDataGridEvent.ITEM_CLOSE, close);
+			addEventListener(AdvancedDataGridEvent.SORT, sort);
 		}
 		
 		private function creationComplete(event:FlexEvent):void
@@ -129,5 +132,9 @@ package mfui.widgets
 			super.dataProvider = groupingCollection;
 		}
 		
+		private function sort(event:AdvancedDataGridEvent):void
+		{
+			this.ganttChart.paintChart();
+		}
 	}
 }
