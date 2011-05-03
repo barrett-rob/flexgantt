@@ -4,7 +4,10 @@ package mfui.widgets.gantt
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
+	import mfui.util.IconProvider;
+	
 	import mx.core.mx_internal;
+	import mx.managers.CursorManagerPriority;
 	
 	import spark.components.Button;
 	import spark.effects.Move;
@@ -26,6 +29,8 @@ package mfui.widgets.gantt
 			this.width = 20;
 			this.setStyle("skinClass", SliderSkin);
 			
+			this.addEventListener(MouseEvent.MOUSE_OVER, mouseover);
+			this.addEventListener(MouseEvent.MOUSE_OUT, mouseout);
 			this.addEventListener(MouseEvent.MOUSE_DOWN, mousedown);
 			this.addEventListener(MouseEvent.MOUSE_UP, mouseup);
 			this.addEventListener(MouseEvent.MOUSE_MOVE, mousemove);
@@ -71,12 +76,23 @@ package mfui.widgets.gantt
 				+ "\nFinish: " + this.finish;
 		}
 		
+		private function mouseover(event:MouseEvent):void
+		{
+			cursorManager.setCursor(IconProvider.HAND_OPEN, CursorManagerPriority.MEDIUM, -8, -8);
+		}
+		
+		private function mouseout(event:MouseEvent):void
+		{
+			cursorManager.removeAllCursors();
+		}
+		
 		private function mousedown(event:MouseEvent):void
 		{
 			if (event.target == this)
 			{
 				this.isMouseDown = true;
 				this.moveRelativeTo = localToGlobal(new Point(event.localX, event.localY));
+				cursorManager.setCursor(IconProvider.HAND_CLOSED, CursorManagerPriority.HIGH, -8, -8);
 			}
 		}
 		
@@ -87,6 +103,7 @@ package mfui.widgets.gantt
 				this.isMouseDown = false;
 				this.moveRelativeTo = null;
 				this.dispatchEvent(new SliderEvent(SliderEvent.MOVE, this));
+				cursorManager.setCursor(IconProvider.HAND_OPEN, CursorManagerPriority.HIGH, -8, -8);
 			}
 		}
 		
