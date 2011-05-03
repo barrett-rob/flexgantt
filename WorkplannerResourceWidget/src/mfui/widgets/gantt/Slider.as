@@ -4,6 +4,8 @@ package mfui.widgets.gantt
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
+	import mx.core.mx_internal;
+	
 	import spark.components.Button;
 	import spark.effects.Move;
 	
@@ -11,8 +13,8 @@ package mfui.widgets.gantt
 	{
 		
 		private var _item:XML;
-		public var start:Date;
-		public var finish:Date;
+		private var _start:Date;
+		private var _finish:Date;
 		
 		private var isMouseDown:Boolean = false;
 		private var moveRelativeTo:Point;
@@ -32,15 +34,34 @@ package mfui.widgets.gantt
 		public function set item(item:XML):void
 		{
 			this._item = item;
-			this.start = new Date(Date.parse(item.start));
-			this.finish = new Date(Date.parse(item.finish));
-			toolTip = getToolTip(item);
 		}
 		
-		private function getToolTip(item:XML):String
+		public function set start(d:Date):void
 		{
-			return "Work Order: " + item.workOrder 
-				+ "\nTask: " + item.workOrderTaskNo
+			this._item.start = d.toString();
+			setupToolTip();
+		}
+		
+		public function get start():Date
+		{
+			return this._item == null ? null : new Date(Date.parse(this._item.start));		
+		}
+		
+		public function set finish(d:Date):void
+		{
+			this._item.finish = d.toString();
+			setupToolTip();
+		}
+		
+		public function get finish():Date
+		{
+			return this._item == null ? null : new Date(Date.parse(this._item.finish)); 
+		}
+		
+		private function setupToolTip():void
+		{
+			this.toolTip = "Work Order: " + _item.workOrder 
+				+ "\nTask: " + _item.workOrderTaskNo
 				+ "\nStart: " + this.start
 				+ "\nFinish: " + this.finish;
 		}
@@ -60,6 +81,7 @@ package mfui.widgets.gantt
 			{
 				this.isMouseDown = false;
 				this.moveRelativeTo = null;
+				this.dispatchEvent(new SliderEvent(SliderEvent.MOVE, this));
 			}
 		}
 		

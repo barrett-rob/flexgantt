@@ -6,6 +6,7 @@ package mfui.widgets
 	import flash.text.engine.FontWeight;
 	
 	import mfui.widgets.gantt.Slider;
+	import mfui.widgets.gantt.SliderEvent;
 	
 	import mx.collections.GroupingCollection2;
 	import mx.collections.IViewCursor;
@@ -38,6 +39,7 @@ package mfui.widgets
 		{
 			this.addEventListener(ResizeEvent.RESIZE, resize);
 			this.addEventListener(MouseEvent.MOUSE_WHEEL, mousewheel);
+			this.addEventListener(SliderEvent.MOVE, slidermove);
 		}
 		
 		internal function set ganttData(ganttData:GanttData):void
@@ -90,7 +92,7 @@ package mfui.widgets
 		{
 			var line:UIComponent = new UIComponent();
 			line.x = 0;
-			line.y = getRowY(i) - (this._ganttData.rowHeight / 2) - 1;
+			line.y = getYForRow(i) - (this._ganttData.rowHeight / 2) - 1;
 			line.graphics.lineStyle(0.25, 0, 0.25);
 			line.graphics.lineTo(this._scaledWidth - HORIZONTAL_PADDING, 0);
 			this.addChild(line);
@@ -104,21 +106,19 @@ package mfui.widgets
 			var d:Date = new Date(this._first.getTime());
 			while (d.getTime() < this._last.getTime() + MS_PER_DAY)
 			{
-				paintScaleLine(getDateX(d), d);
+				paintScaleLine(getXForDate(d), d);
 				d = new Date(d.getTime() + MS_PER_DAY);
 			}
 		}
 		
-		private function getDateX(d:Date):int
+		private function getXForDate(d:Date):int
 		{
 			var pxstart:int = HORIZONTAL_PADDING;
 			var pxfinish:int = this._scaledWidth - HORIZONTAL_PADDING;
 			var pxdiff:int = pxfinish - pxstart;
 			
 			var msdiff:Number = this._last.getTime() - this._first.getTime();
-			
 			var factor:Number = pxdiff / msdiff;
-			
 			var x:int = (d.getTime() - this._first.getTime()) * factor;
 			return x;
 		}
@@ -161,6 +161,13 @@ package mfui.widgets
 					last = finish;
 				}
 			}
+			
+			/* start a day before earliest date */
+			first = new Date(new Date(first.getFullYear(), first.getMonth(), first.getDate()).getTime() - MS_PER_DAY);
+			
+			/* end a day after last date*/
+			last = new Date(new Date(last.getFullYear(), last.getMonth(), last.getDate()).getTime() + MS_PER_DAY);
+			
 			setScale(first, last);
 		}
 		
@@ -170,7 +177,7 @@ package mfui.widgets
 			this._last = last;
 		}
 		
-		private function getRowY(i:int):Number
+		private function getYForRow(i:int):Number
 		{
 			return ((this._rowHeight + /* padding */ 4) * (i + 1)) + this._ganttData.headerHeight;
 		}
@@ -202,11 +209,11 @@ package mfui.widgets
 		private function paintSlider(i:int, item:XML):void
 		{
 			var slider:Slider = new Slider();
-			slider.y = getRowY(i) - this._rowHeight - 1;
+			slider.y = getYForRow(i) - this._rowHeight - 1;
 			slider.item = item;
 			this.addElement(slider);
 			
-			var xTo:int = getDateX(slider.start); 
+			var xTo:int = getXForDate(slider.start); 
 			
 			var m:Move;
 			m = new Move(slider);
@@ -217,7 +224,7 @@ package mfui.widgets
 			
 			var r:Resize = new Resize(slider);
 			r.widthFrom = slider.width;
-			r.widthTo = getDateX(slider.finish) - xTo;
+			r.widthTo = getXForDate(slider.finish) - xTo;
 			r.play();
 		}
 		
@@ -245,5 +252,29 @@ package mfui.widgets
 				paintChart();
 			}
 		}
+		
+		private function slidermove(event:SliderEvent):void
+		{
+			var slider:Slider = event.slider;
+			var start:Date = getDateForX(slider.x);
+			var finish:Date = getDateForX(slider.x + slider.width);
+			trace('start:', start);
+			trace('finish:', finish);
+			slider.start = start;
+			slider.finish = finish;
+		}
+		
+		private function getDateForX(x:int):Date
+		{
+			var pxstart:int = HORIZONTAL_PADDING;
+			var pxfinish:int = this._scaledWidth - HORIZONTAL_PADDING;
+			var pxdiff:int = pxfinish - pxstart;
+			var factor:Number = x / pxdiff;
+			
+			var msdiff:Number = this._last.getTime() - this._first.getTime();
+			var d:Date = new Date((msdiff * factor) + this._first.getTime());
+			return d;
+		}
+		
 	}
 }
