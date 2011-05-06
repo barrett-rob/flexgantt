@@ -5,6 +5,7 @@ package mfui.widgets
 	import flash.geom.Rectangle;
 	import flash.text.engine.FontWeight;
 	
+	import mfui.widgets.gantt.DateBackground;
 	import mfui.widgets.gantt.Slider;
 	import mfui.widgets.gantt.SliderEvent;
 	
@@ -107,7 +108,7 @@ package mfui.widgets
 			var d:Date = new Date(this._first.getTime());
 			while (d.getTime() < this._last.getTime() + MS_PER_DAY)
 			{
-				paintScaleLine(getXForDate(d), d);
+				dateBackgrounds(getXForDate(d), d);
 				d = new Date(d.getTime() + MS_PER_DAY);
 			}
 		}
@@ -124,23 +125,16 @@ package mfui.widgets
 			return x;
 		}
 		
-		private function paintScaleLine(x:int, d:Date):void
+		private function dateBackgrounds(xoffset:int, d:Date):void
 		{
-			var line:UIComponent = new UIComponent();
-			line.x = x;
-			line.y = this._ganttData.headerHeight + 5;
-			line.graphics.lineStyle(0.25, 0, 0.25);
-			line.graphics.lineTo(0, this.height);
-			this.addChild(line);
-			var label:Label = new Label();
-			label.setStyle("fontFamily", "Helvetica, _sans");
-			label.setStyle("fontSize", "10px");
-			label.alpha = 0.33;
-			label.text = d.toLocaleDateString();
-			label.x = line.x + 12;
-			label.y = 10;
-			label.rotation = 90;
-			this.addElement(label);
+			var yoffset:int = this._ganttData.headerHeight + 5;
+			var dateBackground:DateBackground = new DateBackground();
+			dateBackground.x = xoffset;
+			dateBackground.y = yoffset;
+			dateBackground.width = getXForDate(new Date(d.getTime() + MS_PER_DAY)) - xoffset;
+			dateBackground.height = this.height - yoffset;
+			dateBackground.date = d;
+			this.addChild(dateBackground);
 		}
 		
 		private function getScaleFromData():void
