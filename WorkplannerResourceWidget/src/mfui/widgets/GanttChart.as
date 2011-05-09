@@ -18,6 +18,7 @@ package mfui.widgets
 	import mx.controls.AdvancedDataGrid;
 	import mx.core.ScrollPolicy;
 	import mx.core.UIComponent;
+	import mx.events.FlexEvent;
 	import mx.events.ResizeEvent;
 	
 	import spark.components.Label;
@@ -28,7 +29,8 @@ package mfui.widgets
 	{
 		
 		private const MS_PER_DAY:Number = 1000 * 60 * 60 * 24;
-		private const HORIZONTAL_PADDING:Number = 15;
+		private const HORIZONTAL_PADDING:Number = 10;
+		private const VERTICAL_PADDING:Number = 20;
 		private const ZOOM_FACTOR:Number = 1.5;
 		
 		private var _ganttData:GanttData;
@@ -58,15 +60,24 @@ package mfui.widgets
 		internal function paintChart():void
 		{
 			
-			if (!this._ganttData || !this._ganttData.dataProvider || !this._ganttData.rawData)
-				return; /* no data yet */
-			
 			if (!this._scaledWidth || this._scaledWidth < 1)
 				this._scaledWidth = this.width;
+			
+			paintBorder();
+			
+			if (!this._ganttData || !this._ganttData.dataProvider || !this._ganttData.rawData)
+				return; /* no data yet */
 			
 			this.removeAllChildren();
 			paintLinesAndLabels();
 			paintRows();
+		}
+		
+		private function paintBorder():void
+		{
+			this.graphics.clear();
+			this.graphics.lineStyle(0.25, 0, 0.25);
+			this.graphics.drawRect(HORIZONTAL_PADDING, VERTICAL_PADDING, this._scaledWidth, this.height - (VERTICAL_PADDING * 2));
 		}
 		
 		private function paintLinesAndLabels():void
@@ -127,7 +138,7 @@ package mfui.widgets
 		
 		private function dateBackgrounds(xoffset:int, d:Date):void
 		{
-			var yoffset:int = this._ganttData.headerHeight + 5;
+			var yoffset:int = VERTICAL_PADDING + 5;
 			var dateBackground:DateBackground = new DateBackground();
 			dateBackground.x = xoffset;
 			dateBackground.y = yoffset;
@@ -174,7 +185,7 @@ package mfui.widgets
 		
 		private function getYForRow(i:int):Number
 		{
-			return ((this._rowHeight + /* padding */ 4) * (i + 1)) + this._ganttData.headerHeight;
+			return ((this._rowHeight + /* padding */ 4) * (i + 1)) + VERTICAL_PADDING;
 		}
 		
 		private function paintRows():void
