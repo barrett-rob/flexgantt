@@ -76,8 +76,8 @@ package mfui.widgets
 		private function paintBorder():void
 		{
 			this.graphics.clear();
-			this.graphics.lineStyle(0.25, 0, 0.25);
-			this.graphics.drawRect(HORIZONTAL_PADDING, VERTICAL_PADDING, this._scaledWidth, this.height - (VERTICAL_PADDING * 2));
+			this.graphics.lineStyle(0.5, 0, 0.5);
+			this.graphics.drawRect(HORIZONTAL_PADDING, VERTICAL_PADDING, this._scaledWidth - HORIZONTAL_PADDING, this.height - (VERTICAL_PADDING * 2));
 		}
 		
 		private function paintLinesAndLabels():void
@@ -104,7 +104,7 @@ package mfui.widgets
 		private function paintHorizontalLine(i:int):void
 		{
 			var line:UIComponent = new UIComponent();
-			line.x = 0;
+			line.x = HORIZONTAL_PADDING;
 			line.y = getYForRow(i) - (this._ganttData.rowHeight / 2) - 1;
 			line.graphics.lineStyle(0.25, 0, 0.25);
 			line.graphics.lineTo(this._scaledWidth - HORIZONTAL_PADDING, 0);
@@ -132,18 +132,18 @@ package mfui.widgets
 			
 			var msdiff:Number = this._last.getTime() - this._first.getTime();
 			var factor:Number = pxdiff / msdiff;
-			var x:int = (d.getTime() - this._first.getTime()) * factor;
+			var x:int = ((d.getTime() - this._first.getTime()) * factor) + HORIZONTAL_PADDING;
 			return x;
 		}
 		
 		private function dateBackgrounds(xoffset:int, d:Date):void
 		{
-			var yoffset:int = VERTICAL_PADDING + 5;
+			var yoffset:int = VERTICAL_PADDING + 1;
 			var dateBackground:DateBackground = new DateBackground();
 			dateBackground.x = xoffset;
 			dateBackground.y = yoffset;
 			dateBackground.width = getXForDate(new Date(d.getTime() + MS_PER_DAY)) - xoffset;
-			dateBackground.height = this.height - yoffset;
+			dateBackground.height = this.height - (yoffset * 2);
 			dateBackground.date = d;
 			this.addChild(dateBackground);
 		}

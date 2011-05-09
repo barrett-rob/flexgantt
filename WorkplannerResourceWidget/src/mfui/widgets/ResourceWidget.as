@@ -22,12 +22,10 @@ package mfui.widgets
 			vDividedBox.verticalScrollPolicy = vDividedBox.horizontalScrollPolicy = ScrollPolicy.OFF;
 			vDividedBox.percentHeight = 90;
 			vDividedBox.percentWidth = 100;
-			vDividedBox.resizeToContent = false;
 			
 			var hDividedBox:HDividedBox = new HDividedBox();
 			hDividedBox.verticalScrollPolicy = hDividedBox.horizontalScrollPolicy = ScrollPolicy.OFF;
 			hDividedBox.percentHeight = hDividedBox.percentWidth = 100;
-			hDividedBox.resizeToContent = false;
 			
 			this.ganttData = new GanttData();
 			this.ganttData.percentHeight = this.ganttData.percentWidth = 100;
