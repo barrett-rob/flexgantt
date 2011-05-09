@@ -6,6 +6,31 @@
 			   minWidth="1280" 
 			   minHeight="960"
 			   >
+	
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mfui "mfui.widgets.*";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		@namespace controls "mx.controls.*";
+		
+		@font-face {
+			src: url("./verdana.ttf");
+			fontFamily: VerdanaEm;
+			embedAsCFF: false;
+			advancedAntiAliasing: true;
+		}
+		
+		s|BorderContainer {
+			font-family: VerdanaEm;
+			font-size: 11pt;
+		}
+		
+		controls|AdvancedDataGrid {
+			font-family: VerdanaEm;
+			font-size: 11pt;
+		}
+		
+	</fx:Style>
 	<fx:Script>
 		<![CDATA[
 
