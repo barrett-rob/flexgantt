@@ -12,6 +12,7 @@ package mfui.widgets
 	import mx.collections.IViewCursor;
 	import mx.collections.XMLListCollection;
 	import mx.controls.AdvancedDataGrid;
+	import mx.controls.DateField;
 	import mx.controls.advancedDataGridClasses.AdvancedDataGridColumn;
 	import mx.core.ScrollPolicy;
 	import mx.events.AdvancedDataGridEvent;
@@ -39,18 +40,22 @@ package mfui.widgets
 			this.verticalScrollPolicy = this.horizontalScrollPolicy = ScrollPolicy.ON;
 			this.variableRowHeight = false;
 			this.headerHeight = 40;
+			this.editable = "true";
 			
 			var workOrderCol:AdvancedDataGridColumn = new AdvancedDataGridColumn();
+			workOrderCol.editable = false;
 			workOrderCol.minWidth = 110;
 			workOrderCol.headerText = "Work Order";
 			workOrderCol.dataField = "workOrder";
 
 			var workOrderTaskNoCol:AdvancedDataGridColumn = new AdvancedDataGridColumn();
+			workOrderTaskNoCol.editable = false;
 			workOrderTaskNoCol.minWidth = 40;
 			workOrderTaskNoCol.headerText = "Task";
 			workOrderTaskNoCol.dataField = "workOrderTaskNo";
 
 			var descriptionCol:AdvancedDataGridColumn = new AdvancedDataGridColumn();
+			descriptionCol.editable = false;
 			descriptionCol.minWidth = 300;
 			descriptionCol.headerText = "Description";
 			descriptionCol.dataField = "description";
