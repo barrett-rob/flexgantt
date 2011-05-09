@@ -39,6 +39,7 @@ package mfui.widgets.gantt
 		public function set item(item:XML):void
 		{
 			this._item = item;
+			setupToolTip();
 		}
 		
 		public function get item():XML
@@ -78,12 +79,12 @@ package mfui.widgets.gantt
 		
 		private function mouseover(event:MouseEvent):void
 		{
-			cursorManager.setCursor(IconProvider.HAND_OPEN, CursorManagerPriority.MEDIUM, -8, -8);
+			this.cursorManager.setCursor(IconProvider.HAND_OPEN, CursorManagerPriority.MEDIUM, -8, -8);
 		}
 		
 		private function mouseout(event:MouseEvent):void
 		{
-			cursorManager.removeAllCursors();
+			this.cursorManager.removeAllCursors();
 		}
 		
 		private function mousedown(event:MouseEvent):void
@@ -92,7 +93,8 @@ package mfui.widgets.gantt
 			{
 				this.isMouseDown = true;
 				this.moveRelativeTo = localToGlobal(new Point(event.localX, event.localY));
-				cursorManager.setCursor(IconProvider.HAND_CLOSED, CursorManagerPriority.HIGH, -8, -8);
+				this.cursorManager.removeAllCursors();
+				this.cursorManager.setCursor(IconProvider.HAND_CLOSED, CursorManagerPriority.HIGH, -8, -8);
 			}
 		}
 		
@@ -103,7 +105,8 @@ package mfui.widgets.gantt
 				this.isMouseDown = false;
 				this.moveRelativeTo = null;
 				this.dispatchEvent(new SliderEvent(SliderEvent.MOVE, this));
-				cursorManager.setCursor(IconProvider.HAND_OPEN, CursorManagerPriority.HIGH, -8, -8);
+				this.cursorManager.removeAllCursors();
+				this.cursorManager.setCursor(IconProvider.HAND_OPEN, CursorManagerPriority.MEDIUM, -8, -8);
 			}
 		}
 		
