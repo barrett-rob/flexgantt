@@ -68,13 +68,13 @@
     <s:Rect id="fill" left="1" right="1" top="1" bottom="1" radiusX="2">
         <s:fill>
             <s:LinearGradient rotation="90">
-                <s:GradientEntry color="0xFFFFFF" 
-                                 color.over="0xFFFFFF" 
-                                 color.down="0xDDDDDD" 
-                                 alpha="0.85" />
-                <s:GradientEntry color="0x9999FF" 
+                <s:GradientEntry color="0x5555FF" 
                                  color.over="0x5555FF" 
-                                 color.down="0x3333DD" 
+                                 color.down="0x2222CC" 
+                                 alpha="0.85" />
+                <s:GradientEntry color="0x2222FF" 
+                                 color.over="0x2222FF" 
+                                 color.down="0x1111EE" 
                                  alpha="0.85" />
             </s:LinearGradient>
         </s:fill>
@@ -93,17 +93,17 @@
     <s:Rect id="highlight" left="1" right="1" top="1" bottom="1" radiusX="2">
         <s:fill>
             <s:LinearGradient rotation="90">
-                <s:GradientEntry color="0xFFFFFF"
+                <s:GradientEntry color="0xAAAAFF"
                                  ratio="0.0"
                                  alpha="0.33" 
                                  alpha.over="0.22" 
                                  alpha.down="0.12"/>
-                <s:GradientEntry color="0xFFFFFF"
+                <s:GradientEntry color="0xAAAAFF"
                                  ratio="0.48"
                                  alpha="0.33"
                                  alpha.over="0.22"
                                  alpha.down="0.12" />
-                <s:GradientEntry color="0xFFFFFF"
+                <s:GradientEntry color="0xAAAAFF"
                                  ratio="0.48001"
                                  alpha="0" />
             </s:LinearGradient>
@@ -113,8 +113,8 @@
     <s:Rect id="highlightStroke" left="1" right="1" top="1" bottom="1" radiusX="2" excludeFrom="down">
         <s:stroke>
             <s:LinearGradientStroke rotation="90" weight="1">
-                <s:GradientEntry color="0xFFFFFF" alpha.over="0.22" />
-                <s:GradientEntry color="0xD8D8D8" alpha.over="0.22" />
+                <s:GradientEntry color="0xAAAAFF" alpha.over="0.22" />
+                <s:GradientEntry color="0x5555BB" alpha.over="0.22" />
             </s:LinearGradientStroke>
         </s:stroke>
     </s:Rect>

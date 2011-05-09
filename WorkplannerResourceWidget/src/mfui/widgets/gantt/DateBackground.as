@@ -39,7 +39,7 @@ package mfui.widgets.gantt
 			this.graphics.beginFill(0xff0000);
 			var matrix:Matrix = new Matrix();
 			matrix.createGradientBox(this.width, this.height);
-			this.graphics.beginGradientFill(GradientType.LINEAR, [ WEEKEND_COLOUR, WEEKEND_COLOUR ], [ 0.45, 0.8], [ 0, 255 ], matrix, SpreadMethod.PAD);
+			this.graphics.beginGradientFill(GradientType.LINEAR, [ WEEKEND_COLOUR, WEEKEND_COLOUR ], [ 0.6, 0.8], [ 0, 255 ], matrix, SpreadMethod.PAD);
 			this.graphics.drawRect(0, 0, this.width, this.height);
 			
 			paintLabel(d);
@@ -51,7 +51,7 @@ package mfui.widgets.gantt
 			this.graphics.beginFill(0xff0000);
 			var matrix:Matrix = new Matrix();
 			matrix.createGradientBox(this.width, this.height);
-			this.graphics.beginGradientFill(GradientType.LINEAR, [ WEEKEND_COLOUR , WEEKEND_COLOUR ], [ 0.1, 0.45], [ 0, 255 ], matrix, SpreadMethod.PAD);
+			this.graphics.beginGradientFill(GradientType.LINEAR, [ WEEKEND_COLOUR , WEEKEND_COLOUR ], [ 0.4, 0.6], [ 0, 255 ], matrix, SpreadMethod.PAD);
 			this.graphics.drawRect(0, 0, this.width, this.height);
 			
 			paintLabel(d);
