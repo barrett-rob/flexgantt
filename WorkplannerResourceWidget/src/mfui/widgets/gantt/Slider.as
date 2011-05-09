@@ -7,6 +7,7 @@ package mfui.widgets.gantt
 	import mfui.util.IconProvider;
 	
 	import mx.core.mx_internal;
+	import mx.formatters.DateFormatter;
 	import mx.managers.CursorManagerPriority;
 	
 	import spark.components.Button;
@@ -14,6 +15,8 @@ package mfui.widgets.gantt
 	
 	public class Slider extends Button
 	{
+		
+		private var _formatter:DateFormatter;
 		
 		private var _item:XML;
 		private var _start:Date;
@@ -28,6 +31,9 @@ package mfui.widgets.gantt
 			this.height = 18;
 			this.width = 20;
 			this.setStyle("skinClass", SliderSkin);
+			
+			this._formatter = new DateFormatter();
+			this._formatter.formatString = "EEE DD/MM/YYYY HH:NN:SS";
 			
 			this.addEventListener(MouseEvent.MOUSE_OVER, mouseover);
 			this.addEventListener(MouseEvent.MOUSE_OUT, mouseout);
@@ -73,8 +79,8 @@ package mfui.widgets.gantt
 		{
 			this.toolTip = "Work Order: " + _item.workOrder 
 				+ "\nTask: " + _item.workOrderTaskNo
-				+ "\nStart: " + this.start
-				+ "\nFinish: " + this.finish;
+				+ "\nStart: " + this._formatter.format(this.start)
+				+ "\nFinish: " + this._formatter.format(this.finish);
 		}
 		
 		private function mouseover(event:MouseEvent):void
