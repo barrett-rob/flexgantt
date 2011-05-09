@@ -77,7 +77,7 @@ package mfui.widgets
 		{
 			this.graphics.clear();
 			this.graphics.lineStyle(0.5, 0, 0.5);
-			this.graphics.drawRect(HORIZONTAL_PADDING, VERTICAL_PADDING, this._scaledWidth - HORIZONTAL_PADDING, this.height - (VERTICAL_PADDING * 2));
+			this.graphics.drawRect(HORIZONTAL_PADDING, VERTICAL_PADDING, this._scaledWidth - (HORIZONTAL_PADDING * 2), this.height - (VERTICAL_PADDING * 2));
 		}
 		
 		private function paintLinesAndLabels():void
@@ -167,11 +167,11 @@ package mfui.widgets
 				}
 			}
 			
-			/* start a day before earliest date */
-			first = new Date(new Date(first.getFullYear(), first.getMonth(), first.getDate()).getTime() - MS_PER_DAY);
+			/* start a week before earliest date */
+			first = new Date(new Date(first.getFullYear(), first.getMonth(), first.getDate()).getTime() - (7 * MS_PER_DAY));
 			
-			/* end a day after last date*/
-			last = new Date(new Date(last.getFullYear(), last.getMonth(), last.getDate()).getTime() + MS_PER_DAY);
+			/* end a week after last date*/
+			last = new Date(new Date(last.getFullYear(), last.getMonth(), last.getDate()).getTime() + (7 * MS_PER_DAY));
 			
 			setScale(first, last);
 		}
