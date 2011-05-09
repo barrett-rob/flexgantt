@@ -103,12 +103,11 @@ package mfui.widgets
 		
 		private function paintHorizontalLine(i:int):void
 		{
-			var line:UIComponent = new UIComponent();
-			line.x = HORIZONTAL_PADDING;
-			line.y = getYForRow(i) - (this._ganttData.rowHeight / 2) - 1;
-			line.graphics.lineStyle(0.25, 0, 0.25);
-			line.graphics.lineTo(this._scaledWidth - HORIZONTAL_PADDING, 0);
-			this.addChild(line);
+			this.graphics.lineStyle(0.25, 0, 0.25);
+			var xx:int = HORIZONTAL_PADDING;
+			var yy:int = getYForRow(i) - (this._ganttData.rowHeight / 2) - 1;  
+			this.graphics.moveTo(xx, yy);
+			this.graphics.lineTo(this._scaledWidth - HORIZONTAL_PADDING, yy);
 		}
 		
 		private function paintScaleLines():void
