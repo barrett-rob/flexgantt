@@ -21,13 +21,16 @@
 		}
 		
 		s|BorderContainer {
-			font-family: VerdanaEm;
-			font-size: 11pt;
+			border-style: solid;
+			border-color: black;
+			border-visible: true;
+			border-weight: 2;
 		}
 		
 		controls|AdvancedDataGrid {
 			font-family: VerdanaEm;
 			font-size: 11pt;
+			font-anti-alias-type: advanced;
 		}
 		
 	</fx:Style>
