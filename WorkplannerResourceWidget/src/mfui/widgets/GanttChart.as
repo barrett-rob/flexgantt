@@ -2,6 +2,7 @@ package mfui.widgets
 {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.text.engine.FontWeight;
 	
@@ -16,6 +17,7 @@ package mfui.widgets
 	import mx.containers.HDividedBox;
 	import mx.containers.VDividedBox;
 	import mx.controls.AdvancedDataGrid;
+	import mx.controls.listClasses.IListItemRenderer;
 	import mx.core.ScrollPolicy;
 	import mx.core.UIComponent;
 	import mx.events.FlexEvent;
@@ -30,11 +32,11 @@ package mfui.widgets
 		
 		private const MS_PER_DAY:Number = 1000 * 60 * 60 * 24;
 		private const HORIZONTAL_PADDING:Number = 10;
-		private const VERTICAL_PADDING:Number = 20;
+		private const VERTICAL_PADDING:Number = 40;
 		private const ZOOM_FACTOR:Number = 1.5;
+		private const ROW_PADDING:int = 3;
 		
 		private var _ganttData:GanttData;
-		private var _rowHeight:Number;
 		private var _scaledWidth:Number;
 		private var _first:Date;
 		private var _last:Date;
@@ -49,7 +51,6 @@ package mfui.widgets
 		internal function set ganttData(ganttData:GanttData):void
 		{
 			this._ganttData = ganttData;
-			this._rowHeight = this._ganttData.rowHeight;
 		}
 		
 		private function resize(event:ResizeEvent):void
@@ -103,12 +104,30 @@ package mfui.widgets
 		
 		private function paintHorizontalLine(i:int):void
 		{
-			this.graphics.lineStyle(0.25, 0, 0.25);
 			var xx:int = HORIZONTAL_PADDING;
-			var yy:int = getYForRow(i) - (this._ganttData.rowHeight / 2) - 1;  
+			var yy:int = getYForRow(i);
+			if (yy < 0)
+			{
+				return;
+			}
+			yy += (this._ganttData.rowHeight / 2)
+			this.graphics.lineStyle(0.25, 0, 0.25);
 			this.graphics.moveTo(xx, yy);
 			this.graphics.lineTo(this._scaledWidth - HORIZONTAL_PADDING, yy);
 		}
+		
+		private function getYForRow(i:int):Number
+		{
+			var renderer:IListItemRenderer = this._ganttData.indexToItemRenderer(i);
+			if (!renderer) {
+				/* only paint visible rows */
+				return -1;
+			}
+			var p:Point = this._ganttData.localToGlobal(new Point(0, renderer.y));
+			return this.globalToLocal(p).y;
+		}
+		
+
 		
 		private function paintScaleLines():void
 		{
@@ -182,11 +201,6 @@ package mfui.widgets
 			this._last = last;
 		}
 		
-		private function getYForRow(i:int):Number
-		{
-			return ((this._rowHeight + /* padding */ 4) * (i + 1)) + VERTICAL_PADDING;
-		}
-		
 		private function paintRows():void
 		{
 			var i:int = 0;
@@ -213,8 +227,13 @@ package mfui.widgets
 		
 		private function paintSlider(i:int, item:XML):void
 		{
+			var yy:int = getYForRow(i);
+			if (yy < 0)
+			{
+				return;
+			}
 			var slider:Slider = new Slider();
-			slider.y = getYForRow(i) - this._rowHeight - 1;
+			slider.y = yy + 2;
 			slider.item = item;
 			this.addElement(slider);
 			

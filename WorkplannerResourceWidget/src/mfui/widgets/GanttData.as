@@ -42,6 +42,9 @@ package mfui.widgets
 			this.headerHeight = 40;
 			this.editable = "true";
 			
+			this.setStyle("paddingTop", 2);
+			this.setStyle("paddingBottom", 2);
+			
 			var workOrderCol:AdvancedDataGridColumn = new AdvancedDataGridColumn();
 			workOrderCol.editable = false;
 			workOrderCol.minWidth = 110;
