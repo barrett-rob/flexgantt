@@ -259,7 +259,7 @@ package mfui.widgets
 		
 		private function mousewheel(event:MouseEvent):void
 		{
-			if (event.target != this)
+			if (event.currentTarget != this)
 				return;
 			
 			var xoffset:Number = this.horizontalScrollPosition + event.localX;
