@@ -5,6 +5,7 @@ package mfui.widgets
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.text.engine.FontWeight;
+	import flash.utils.getTimer;
 	
 	import mfui.widgets.gantt.DateBackground;
 	import mfui.widgets.gantt.Slider;
@@ -292,10 +293,18 @@ package mfui.widgets
 		private function slidermove(event:SliderEvent):void
 		{
 			var slider:Slider = event.slider;
-			var start:Date = getDateForX(slider.x);
-			var finish:Date = getDateForX(slider.x + slider.width);
-			slider.start = start;
-			slider.finish = finish;
+			var msdiff:Number = slider.finish.getTime() - slider.start.getTime();
+			
+			/* snap to preceding hour boundary */
+			var snapto:Date = new Date(getDateForX(slider.x));
+			snapto.minutes = 0;
+			snapto.seconds = 0;
+			snapto.milliseconds = 0;
+			
+			slider.start = snapto;
+			slider.x = getXForDate(snapto);
+			
+			slider.finish = new Date(snapto.getTime() + msdiff);
 			
 			if (!this._ganttData.dataProvider)
 				return;
